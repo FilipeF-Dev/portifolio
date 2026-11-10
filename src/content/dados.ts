@@ -85,6 +85,22 @@ export const projetos: Projeto[] = [
     ],
   },
   {
+    id: "mcp-builder",
+    nome: "MCP-Builder",
+    resumo:
+      "Ferramenta que mapeia uma empresa, do negócio à infraestrutura, e gera a base de um servidor MCP para conectar agentes de IA aos sistemas internos. Feita para pequenas e médias empresas, sem exigir conhecimento técnico de quem responde.",
+    mostra: "Agentes de IA conectados aos sistemas da empresa com segurança, skills e aprovação humana",
+    temas: ["IA", "Arquitetura"],
+    stack: ["TypeScript", "MCP SDK", "PostgreSQL", "SQL Server"],
+    decisoes: [
+      "Entrevista em seis níveis, do ramo de atuação ao que o agente pode fazer, e análise técnica somente leitura dos computadores, da rede e dos bancos",
+      "O que a ferramenta não consegue entender vira uma pergunta para uma pessoa, em vez de uma suposição",
+      "Consultas aos sistemas fixas e somente leitura, com usuário de banco sem permissão de escrita",
+      "Skills e servidor MCP montados apenas com o que o TI aprovou, item a item, com 56 testes automatizados e CI",
+    ],
+    links: [{ rotulo: "Repositório", url: "https://github.com/FilipeF-Dev/mcp-builder" }],
+  },
+  {
     id: "lar",
     nome: "Lar",
     resumo:
@@ -189,6 +205,8 @@ export const competencias: GrupoCompetencias[] = [
     grupo: "IA aplicada",
     itens: [
       { nome: "Integração com LLMs (Claude API)", onde: "destaque" },
+      { nome: "MCP (Model Context Protocol)", onde: "mcp-builder" },
+      { nome: "Skills e agentes de IA", onde: "mcp-builder" },
       { nome: "Engenharia de prompt e de contexto", onde: "destaque" },
       { nome: "Avaliação de modelos", onde: "destaque" },
       { nome: "Controle de custo e prompt caching", onde: "destaque" },
