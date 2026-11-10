@@ -2,7 +2,7 @@
 
 export const perfil = {
   nome: "Filipe Ferreira",
-  cargo: "Analista de TI · software e automações com IA",
+  cargo: "Analista de TI · Desenvolvimento e IA",
   local: "Juiz de Fora, MG",
   // Coloque a foto em public/ e aponte aqui (ex.: "/foto.jpg"). Sem foto, aparecem as iniciais.
   foto: "/foto.jpg" as string | null,
@@ -29,24 +29,25 @@ export const secoes = [
 
 export const destaque = {
   titulo: "Triagem de alertas do Zabbix com IA",
+  subtitulo: "Projeto em destaque, em produção e com código aberto",
   problema:
-    "Um alerta às 3 da manhã diz o que aconteceu, mas não por quê nem por onde começar. Numa TI enxuta, sem plantão, quem lê precisa juntar sozinho o histórico, os outros alertas do mesmo horário e o que se sabe do ambiente.",
+    "O Zabbix avisa bem quando algo cai, mas o alerta só diz o que aconteceu. Para entender a causa e saber por onde começar, era preciso juntar o histórico, os outros alertas do mesmo horário e o que se sabe do ambiente, muitas vezes de madrugada e sem ninguém de plantão.",
   solucao:
-    "Para cada problema de gravidade Média ou maior, um serviço monta o contexto pela API do Zabbix e pede ao Claude as causas prováveis e o que conferir primeiro. Chega como um segundo e-mail, junto do alerta normal. Só sugere: o modelo não recebe ferramenta nenhuma.",
+    "Desenvolvi um serviço que, para cada problema de gravidade média ou maior, reúne o contexto pela API do Zabbix e envia ao Claude. A análise chega em um segundo e-mail, junto do alerta original, com as causas mais prováveis e o que verificar primeiro. O modelo apenas sugere e não tem acesso para executar nenhuma ação no ambiente.",
   fluxo: [
-    { passo: "Alerta", detalhe: "Zabbix grava o ID numa fila" },
-    { passo: "Regras", detalhe: "Ignora o que voltou sozinho e eventos de massa" },
-    { passo: "Contexto", detalhe: "Histórico e eventos vizinhos pela API" },
-    { passo: "Modelo", detalhe: "Base de conhecimento em cache" },
-    { passo: "E-mail", detalhe: "Causas prováveis e o que conferir" },
+    { passo: "Alerta", detalhe: "O Zabbix registra o evento em uma fila" },
+    { passo: "Regras", detalhe: "Descarta o que se resolveu sozinho e eventos em massa" },
+    { passo: "Contexto", detalhe: "Busca o histórico e os eventos próximos pela API" },
+    { passo: "Modelo", detalhe: "Analisa com a base de conhecimento do ambiente" },
+    { passo: "E-mail", detalhe: "Envia as causas prováveis e os próximos passos" },
   ],
   numeros: [
-    { valor: "76 → ~10", rotulo: "alertas por mês viram análises, depois das regras" },
-    { valor: "26/30", rotulo: "na avaliação às cegas, sem nenhuma resposta errada" },
-    { valor: "< US$ 0,25", rotulo: "de custo por mês" },
+    { valor: "76 → ~10", rotulo: "alertas por mês chegam ao modelo depois das regras de filtragem" },
+    { valor: "26/30", rotulo: "pontos na avaliação às cegas entre três modelos, sem respostas erradas" },
+    { valor: "< US$ 0,25", rotulo: "de custo mensal com a API" },
   ],
   licao:
-    "Os erros que apareceram não vinham do modelo, vinham do contexto que o programa montava. Antes de culpar o modelo, olhe o que você mandou para ele.",
+    "Os erros que apareceram nos testes não eram do modelo, e sim do contexto que o programa montava para ele. Ao corrigir os dados enviados, as análises passaram a acertar. Foi a principal lição do projeto: antes de trocar de modelo, vale revisar o que está sendo enviado a ele.",
   repositorio: "https://github.com/FilipeF-Dev/zabbix-ai-alert-triage",
   stack: ["Python", "Claude API", "Zabbix API", "systemd"],
 };
@@ -69,15 +70,15 @@ export const projetos: Projeto[] = [
     id: "orbita",
     nome: "Órbita",
     resumo:
-      "Sistema de gestão modular para empresas. Nasceu como a intranet da empresa onde trabalho, está em uso todos os dias e virou produto.",
-    mostra: "Especificação antes do código e um assistente de IA desenhado pelo que ele pode enxergar",
+      "Sistema de gestão modular para empresas. Começou como a intranet da empresa em que trabalho, é usado diariamente pelas equipes e evoluiu para um produto.",
+    mostra: "Arquitetura modular, especificação antes do código e um assistente de IA com regras claras de privacidade",
     temas: ["IA", "Web", "Arquitetura"],
     stack: ["Next.js", "TypeScript", "PostgreSQL", "Prisma"],
     decisoes: [
-      "22 módulos sobre um núcleo de usuários, permissões e auditoria, com 275 testes automatizados",
-      "19 documentos de especificação escritos antes do código",
-      "Assistente de IA que não lê os dados do sistema: o gestor vê quanto cada conta usou, nunca o quê",
-      "Provedor de IA atrás de uma interface: trocar de modelo é decisão de custo, não de arquitetura",
+      "22 módulos construídos sobre um núcleo comum de usuários, permissões e auditoria, com 275 testes automatizados",
+      "Cada módulo foi especificado antes da implementação, em 19 documentos de requisitos e decisões",
+      "Assistente de IA que não acessa os dados do sistema; o gestor acompanha o consumo de cada conta, mas não o conteúdo das conversas",
+      "Integração com o provedor de IA isolada em um único ponto, o que permite trocar de modelo sem alterar o restante do sistema",
     ],
     links: [
       { rotulo: "Estudo de caso", url: "https://github.com/FilipeF-Dev/orbita-case-study" },
@@ -87,15 +88,15 @@ export const projetos: Projeto[] = [
     id: "lar",
     nome: "Lar",
     resumo:
-      "App para a família dividir compras, tarefas, agenda e recados, tudo atualizando em tempo real.",
-    mostra: "Mobile de ponta a ponta, tempo real e CI",
+      "Aplicativo para famílias organizarem compras, tarefas, agenda e recados em um só lugar, com atualização em tempo real.",
+    mostra: "Desenvolvimento mobile completo, comunicação em tempo real e integração contínua",
     temas: ["Mobile", "Arquitetura"],
     stack: ["Flutter", "NestJS", "PostgreSQL", "Redis"],
     decisoes: [
-      "Tempo real com Socket.IO, uma sala por grupo",
-      "Isolamento entre grupos testado por uma suíte de segurança",
-      "Refresh token rotativo com renovação idempotente",
-      "CI com testes, APK assinado, distribuição automática e build de iPhone",
+      "Atualização em tempo real com Socket.IO, separada por grupo",
+      "Isolamento entre grupos garantido no backend e validado por testes de segurança",
+      "Autenticação com renovação de sessão segura e tolerante a requisições simultâneas",
+      "Pipeline de CI com testes, geração do APK assinado, distribuição automática e build para iPhone",
     ],
     links: [{ rotulo: "Repositório", url: "https://github.com/FilipeF-Dev/lar" }],
   },
@@ -103,18 +104,18 @@ export const projetos: Projeto[] = [
     id: "petire",
     nome: "Petire",
     resumo:
-      "Cardápio online para lanchonetes do bairro. O cliente monta o pedido no site e fecha no WhatsApp da loja.",
-    mostra: "Segurança no banco com RLS e IA com uma pessoa conferindo",
+      "Cardápio online para lanchonetes de bairro. O cliente monta o pedido no site e finaliza diretamente pelo WhatsApp da loja.",
+    mostra: "Segurança de dados no banco e uso de IA com revisão humana",
     temas: ["IA", "Web"],
     stack: ["Next.js", "Supabase", "Playwright", "Vercel"],
     decisoes: [
-      "Cada loja só vê o próprio cardápio, garantido por RLS e testado por um script que tenta os acessos proibidos",
-      "Importação de cardápio com IA: o JSON passa por um schema e por uma tela de conferência antes de gravar",
-      "Dinheiro sempre em centavos, inteiro, do banco até a tela",
-      "8 jornadas de ponta a ponta com Playwright",
+      "Cada loja acessa apenas os próprios dados, com regras de segurança no banco (RLS) verificadas por testes automatizados",
+      "Importação de cardápio com IA, validada por um esquema de dados e revisada em uma tela de conferência antes de ser publicada",
+      "Valores monetários armazenados em centavos para evitar erros de arredondamento",
+      "Testes de ponta a ponta com Playwright cobrindo as jornadas do cliente, do lojista e do suporte",
     ],
     links: [
-      { rotulo: "No ar", url: "https://petire.vercel.app" },
+      { rotulo: "Ver o site", url: "https://petire.vercel.app" },
       { rotulo: "Repositório", url: "https://github.com/FilipeF-Dev/petire" },
     ],
   },
@@ -122,15 +123,15 @@ export const projetos: Projeto[] = [
     id: "ajude-me",
     nome: "ajude.me",
     resumo:
-      "Plataforma de troca de favores: a habilidade vira moeda, sem dinheiro no meio.",
-    mostra: "Produto especificado e domínio modelado com cuidado",
+      "Plataforma de troca de favores em que as habilidades de cada pessoa funcionam como moeda, sem envolver dinheiro.",
+    mostra: "Especificação de produto e modelagem de domínio",
     temas: ["Web", "Arquitetura"],
     stack: ["Laravel", "PostgreSQL", "PostGIS", "Filament"],
     decisoes: [
-      "Visão, regras de negócio, requisitos numerados e roadmap antes do código",
-      "Não existe saldo: nenhum campo guarda crédito acumulável",
-      "Mudança de estado só por método próprio, que valida e deixa rastro",
-      "Métricas do piloto lidas por coorte mensal",
+      "Visão de produto, regras de negócio, requisitos e roadmap documentados antes do desenvolvimento",
+      "Modelo sem saldo acumulável, para que a plataforma não se transforme em uma moeda paralela",
+      "Mudanças de estado controladas e registradas, garantindo rastreabilidade das negociações",
+      "Indicadores do piloto acompanhados por grupos de usuários ao longo dos meses",
     ],
     links: [{ rotulo: "Repositório", url: "https://github.com/FilipeF-Dev/ajude.me" }],
   },
@@ -138,14 +139,14 @@ export const projetos: Projeto[] = [
     id: "nvoip",
     nome: "API REST em Java",
     resumo:
-      "Teste técnico: cadastro e login com JWT, CRUD de clientes e envio de SMS e chamadas por API externa.",
-    mostra: "Backend clássico em Java",
+      "Desafio técnico com cadastro e login de usuários, gestão de clientes e envio de SMS e chamadas por uma API externa.",
+    mostra: "Desenvolvimento backend em Java com Spring",
     temas: ["Web"],
     stack: ["Java", "Spring Boot", "Spring Security", "OpenFeign"],
     decisoes: [
-      "Filtro JWT próprio no Spring Security e senha com BCrypt",
-      "Camadas controller, service e repository, com DTOs validados",
-      "Tratamento global de erros com respostas padronizadas",
+      "Autenticação com JWT e senhas protegidas com BCrypt",
+      "Arquitetura em camadas, com validação dos dados de entrada",
+      "Tratamento centralizado de erros, com respostas padronizadas",
     ],
     links: [
       { rotulo: "Repositório", url: "https://github.com/FilipeF-Dev/nvoip-java-backend-challenge" },
@@ -157,24 +158,24 @@ export const temas: Tema[] = ["IA", "Web", "Mobile", "Arquitetura"];
 
 export const metodo = [
   {
-    passo: "Especificar",
+    passo: "Entender e especificar",
     texto:
-      "O problema, as regras de negócio, a arquitetura e o que significa estar pronto, escritos antes do código.",
+      "Levanto o problema com quem vai usar a solução e documento as regras de negócio, a arquitetura e os critérios de entrega antes de começar o código.",
   },
   {
     passo: "Decidir",
     texto:
-      "As perguntas que mudam o desenho vêm primeiro: quem pode ver o quê, quanto pode custar, o que fica gravado.",
+      "Defino primeiro as questões que mudam o projeto, como quem pode acessar cada informação, quanto a solução pode custar e o que precisa ser registrado.",
   },
   {
-    passo: "Implementar com IA",
+    passo: "Desenvolver com IA",
     texto:
-      "A IA implementa a partir da especificação e de um arquivo de contexto por projeto. Eu reviso contra o documento.",
+      "Conduzo ferramentas e agentes de IA a partir da especificação e reviso o resultado com base nela, garantindo que o código siga o que foi definido.",
   },
   {
-    passo: "Testar e operar",
+    passo: "Testar e acompanhar",
     texto:
-      "Testes nas regras que custam caro quando quebram, CI, e acompanhar em produção. O que muda vira documento.",
+      "Escrevo testes para as regras mais críticas, uso integração contínua e acompanho o funcionamento em produção. O que muda no caminho volta para a documentação.",
   },
 ];
 
@@ -190,8 +191,8 @@ export const competencias: GrupoCompetencias[] = [
       { nome: "Integração com LLMs (Claude API)", onde: "destaque" },
       { nome: "Engenharia de prompt e de contexto", onde: "destaque" },
       { nome: "Avaliação de modelos", onde: "destaque" },
-      { nome: "Prompt caching e controle de custo", onde: "destaque" },
-      { nome: "IA com humano no ciclo", onde: "petire" },
+      { nome: "Controle de custo e prompt caching", onde: "destaque" },
+      { nome: "IA com revisão humana", onde: "petire" },
     ],
   },
   {
@@ -206,10 +207,10 @@ export const competencias: GrupoCompetencias[] = [
     ],
   },
   {
-    grupo: "Prática",
+    grupo: "Boas práticas",
     itens: [
-      { nome: "Especificação antes do código", onde: "orbita" },
-      { nome: "Testes automatizados e CI", onde: "lar" },
+      { nome: "Especificação e documentação de requisitos", onde: "orbita" },
+      { nome: "Testes automatizados e integração contínua", onde: "lar" },
       { nome: "Segurança de dados e LGPD", onde: "petire" },
       { nome: "Docker" },
     ],
@@ -219,7 +220,7 @@ export const competencias: GrupoCompetencias[] = [
     itens: [
       { nome: "Zabbix e monitoramento", onde: "destaque" },
       { nome: "Windows Server e Active Directory" },
-      { nome: "Redes: Mikrotik, Ubiquiti, Fortinet" },
+      { nome: "Redes: Mikrotik, Ubiquiti e Fortinet" },
       { nome: "Linux e systemd", onde: "destaque" },
     ],
   },
@@ -227,28 +228,38 @@ export const competencias: GrupoCompetencias[] = [
 
 export const trajetoria = [
   {
-    periodo: "2026 – hoje",
+    periodo: "2026 – atual",
     titulo: "Analista de suporte de TI",
     lugar: "Brasil Gourmet",
     texto:
-      "Infraestrutura e suporte da unidade, e as ferramentas internas: a intranet que virou o Órbita e a triagem de alertas com IA.",
+      "Responsável pela infraestrutura e pelo suporte da unidade, além do desenvolvimento das ferramentas internas, como a intranet que deu origem ao Órbita e a triagem de alertas com IA.",
   },
   {
     periodo: "2025 – 2026",
     titulo: "Suporte técnico (estágio)",
     lugar: "Nvoip",
-    texto: "Suporte em VoIP, PABX IP e integrações com CRM; padronização de processos e documentação.",
+    texto:
+      "Atendimento em soluções de VoIP, PABX IP e integrações com CRM, além da padronização de processos e da documentação do suporte.",
   },
   {
     periodo: "2019 – 2025",
     titulo: "Técnico de redes e infraestrutura",
     lugar: "Zamix",
-    texto: "Redes FTTH, links dedicados e monitoramento remoto para empresas.",
+    texto: "Implantação e manutenção de redes FTTH, links dedicados e sistemas de monitoramento remoto para empresas.",
   },
   {
-    periodo: "2024 – em curso",
+    periodo: "2024 – em andamento",
     titulo: "Desenvolvimento Back-End",
     lugar: "Anhanguera",
     texto: "Graduação tecnológica.",
   },
 ];
+
+export const textos = {
+  projetos:
+    "Projetos que desenvolvi do início ao fim. Abra um card para ver as principais decisões de cada um.",
+  metodo:
+    "Começo pela especificação e uso a IA como ferramenta de desenvolvimento, mantendo as decisões de projeto sob minha responsabilidade.",
+  competencias: "Cada competência leva ao projeto em que foi aplicada.",
+  contato: "Fique à vontade para entrar em contato pelo canal que preferir.",
+};

@@ -55,7 +55,7 @@ export function Projetos() {
               <h3 className="text-lg font-semibold">{p.nome}</h3>
               <p className="mt-2 text-sm leading-relaxed text-suave">{p.resumo}</p>
               <p className="mt-3 text-sm">
-                <span className="text-destaque">Mostra:</span> {p.mostra}
+                <span className="text-destaque">Em foco:</span> {p.mostra}
               </p>
               <ul className="mt-4 flex flex-wrap gap-2">
                 {p.stack.map((s) => (

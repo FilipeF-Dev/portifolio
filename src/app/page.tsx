@@ -4,6 +4,7 @@ import { Destaque } from "@/components/Destaque";
 import { Navegacao } from "@/components/Navegacao";
 import { Projetos } from "@/components/Projetos";
 import { Secao } from "@/components/Secao";
+import { textos } from "@/content/dados";
 
 export default function Home() {
   return (
@@ -16,7 +17,7 @@ export default function Home() {
         <Secao
           id="projetos"
           titulo="Projetos"
-          subtitulo="Produtos que construí do zero. Abra um card para ver as decisões que fazem a diferença."
+          subtitulo={textos.projetos}
         >
           <Projetos />
         </Secao>

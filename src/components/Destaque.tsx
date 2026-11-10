@@ -28,7 +28,7 @@ function Fluxo() {
 
 export function Destaque() {
   return (
-    <Secao id="destaque" titulo={destaque.titulo} subtitulo="Projeto em destaque · em produção · código aberto">
+    <Secao id="destaque" titulo={destaque.titulo} subtitulo={destaque.subtitulo}>
       <div className="grid gap-8 md:grid-cols-2">
         <div>
           <h3 className="text-sm font-semibold uppercase tracking-wide text-suave">O problema</h3>

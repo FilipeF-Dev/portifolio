@@ -1,4 +1,4 @@
-import { competencias, metodo, perfil, trajetoria } from "@/content/dados";
+import { competencias, metodo, perfil, textos, trajetoria } from "@/content/dados";
 import { Secao } from "./Secao";
 
 export function Metodo() {
@@ -6,7 +6,7 @@ export function Metodo() {
     <Secao
       id="metodo"
       titulo="Como trabalho"
-      subtitulo="Especificação primeiro. A IA implementa a partir dela, e eu respondo pelas decisões."
+      subtitulo={textos.metodo}
     >
       <ol className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {metodo.map((m, i) => (
@@ -26,7 +26,7 @@ export function Competencias() {
     <Secao
       id="competencias"
       titulo="Competências"
-      subtitulo="Cada uma aponta para onde ela aparece de verdade."
+      subtitulo={textos.competencias}
     >
       <div className="grid gap-8 sm:grid-cols-2">
         {competencias.map((g) => (
@@ -41,7 +41,7 @@ export function Competencias() {
                       href={item.onde === "destaque" ? "#destaque" : `#projeto-${item.onde}`}
                       className="shrink-0 text-xs text-destaque underline-offset-4 hover:underline"
                     >
-                      ver onde
+                      ver projeto
                     </a>
                   )}
                 </li>
@@ -75,7 +75,7 @@ export function Trajetoria() {
 
 export function Contato() {
   return (
-    <Secao id="contato" titulo="Contato" subtitulo="Respondo por qualquer um destes.">
+    <Secao id="contato" titulo="Contato" subtitulo={textos.contato}>
       <dl className="grid gap-4 sm:grid-cols-2">
         <div className="rounded-lg border border-borda bg-superficie p-5">
           <dt className="text-sm text-suave">E-mail</dt>

@@ -48,7 +48,7 @@ export default async function Image() {
           </div>
         </div>
         <div style={{ fontSize: 30, color: "#a1a1aa", marginTop: 56, maxWidth: 980, lineHeight: 1.4 }}>
-          Especificação primeiro, IA na implementação, testes antes de subir.
+          Software, automação e IA aplicados a problemas reais de empresas.
         </div>
         <div style={{ fontSize: 26, color: "#71717a", marginTop: 40 }}>filipef.dev.br</div>
       </div>
