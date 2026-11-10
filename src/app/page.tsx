@@ -4,7 +4,7 @@ import { Destaque } from "@/components/Destaque";
 import { Navegacao } from "@/components/Navegacao";
 import { Projetos } from "@/components/Projetos";
 import { Secao } from "@/components/Secao";
-import { textos } from "@/content/dados";
+import { destaques, textos } from "@/content/dados";
 
 export default function Home() {
   return (
@@ -13,7 +13,9 @@ export default function Home() {
       <main className="relative isolate">
         <div aria-hidden className="fundo-topo" />
         <Abertura />
-        <Destaque />
+        {destaques.map((d) => (
+          <Destaque key={d.id} destaque={d} />
+        ))}
         <Secao
           id="projetos"
           titulo="Projetos"

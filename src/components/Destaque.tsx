@@ -1,10 +1,10 @@
-import { destaque } from "@/content/dados";
+import type { Destaque as DadosDestaque } from "@/content/dados";
 import { Secao } from "./Secao";
 
-function Fluxo() {
+function Fluxo({ fluxo }: { fluxo: DadosDestaque["fluxo"] }) {
   return (
     <ol className="grid gap-3 sm:grid-cols-5">
-      {destaque.fluxo.map((etapa, i) => (
+      {fluxo.map((etapa, i) => (
         <li
           key={etapa.passo}
           className="relative rounded-lg border border-borda bg-superficie p-4"
@@ -12,7 +12,7 @@ function Fluxo() {
           <span className="font-mono text-xs text-destaque">{String(i + 1).padStart(2, "0")}</span>
           <p className="mt-1 font-medium">{etapa.passo}</p>
           <p className="mt-1 text-sm text-suave">{etapa.detalhe}</p>
-          {i < destaque.fluxo.length - 1 && (
+          {i < fluxo.length - 1 && (
             <span
               aria-hidden
               className="absolute -right-2.5 top-1/2 hidden -translate-y-1/2 text-suave sm:block"
@@ -26,9 +26,9 @@ function Fluxo() {
   );
 }
 
-export function Destaque() {
+export function Destaque({ destaque }: { destaque: DadosDestaque }) {
   return (
-    <Secao id="destaque" titulo={destaque.titulo} subtitulo={destaque.subtitulo}>
+    <Secao id={destaque.id} titulo={destaque.titulo} subtitulo={destaque.subtitulo}>
       <div className="grid gap-8 md:grid-cols-2">
         <div>
           <h3 className="text-sm font-semibold uppercase tracking-wide text-suave">O problema</h3>
@@ -41,7 +41,7 @@ export function Destaque() {
       </div>
 
       <div className="mt-10">
-        <Fluxo />
+        <Fluxo fluxo={destaque.fluxo} />
       </div>
 
       <dl className="mt-10 grid gap-6 sm:grid-cols-3">
@@ -54,7 +54,7 @@ export function Destaque() {
       </dl>
 
       <blockquote className="mt-10 rounded-lg bg-destaque-fundo p-6">
-        <p className="text-sm font-semibold uppercase tracking-wide text-destaque">O que aprendi</p>
+        <p className="text-sm font-semibold uppercase tracking-wide text-destaque">{destaque.rotuloLicao}</p>
         <p className="mt-2 leading-relaxed">{destaque.licao}</p>
       </blockquote>
 

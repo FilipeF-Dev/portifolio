@@ -38,7 +38,7 @@ export function Competencias() {
                   <span>{item.nome}</span>
                   {item.onde && (
                     <a
-                      href={item.onde === "destaque" ? "#destaque" : `#projeto-${item.onde}`}
+                      href={item.onde.startsWith("destaque") ? `#${item.onde}` : `#projeto-${item.onde}`}
                       className="shrink-0 text-xs text-destaque underline-offset-4 hover:underline"
                     >
                       ver projeto

@@ -19,7 +19,7 @@ export const perfil = {
 };
 
 export const secoes = [
-  { id: "destaque", rotulo: "Destaque" },
+  { id: "destaque", rotulo: "Destaques" },
   { id: "projetos", rotulo: "Projetos" },
   { id: "metodo", rotulo: "Como trabalho" },
   { id: "competencias", rotulo: "Competências" },
@@ -27,7 +27,22 @@ export const secoes = [
   { id: "contato", rotulo: "Contato" },
 ] as const;
 
-export const destaque = {
+export type Destaque = {
+  id: string;
+  titulo: string;
+  subtitulo: string;
+  problema: string;
+  solucao: string;
+  fluxo: { passo: string; detalhe: string }[];
+  numeros: { valor: string; rotulo: string }[];
+  rotuloLicao: string;
+  licao: string;
+  repositorio: string;
+  stack: string[];
+};
+
+const zabbix: Destaque = {
+  id: "destaque",
   titulo: "Triagem de alertas do Zabbix com IA",
   subtitulo: "Projeto em destaque, em produção e com código aberto",
   problema:
@@ -46,11 +61,41 @@ export const destaque = {
     { valor: "26/30", rotulo: "pontos na avaliação às cegas entre três modelos, sem respostas erradas" },
     { valor: "< US$ 0,25", rotulo: "de custo mensal com a API" },
   ],
+  rotuloLicao: "O que aprendi",
   licao:
     "Os erros que apareceram nos testes não eram do modelo, e sim do contexto que o programa montava para ele. Ao corrigir os dados enviados, as análises passaram a acertar. Foi a principal lição do projeto: antes de trocar de modelo, vale revisar o que está sendo enviado a ele.",
   repositorio: "https://github.com/FilipeF-Dev/zabbix-ai-alert-triage",
   stack: ["Python", "Claude API", "Zabbix API", "systemd"],
 };
+
+const mcpBuilder: Destaque = {
+  id: "destaque-mcp",
+  titulo: "MCP-Builder: empresas prontas para agentes de IA",
+  subtitulo: "Projeto em destaque, com código aberto, testes automatizados e CI",
+  problema:
+    "Para um agente de IA ajudar de verdade, ele precisa conhecer o negócio e ter acesso aos sistemas da empresa, com limites claros do que pode fazer. Em pequenas e médias empresas, raramente há alguém para documentar tudo isso e definir esses limites com segurança.",
+  solucao:
+    "Desenvolvi uma ferramenta que conduz esse processo do início ao fim. Ela entrevista a empresa, analisa a tecnologia apenas com leitura, transforma as dúvidas em perguntas para uma pessoa e gera as skills, as regras de segurança e um servidor MCP, que conecta o agente aos sistemas. Tudo o que vai para o agente passa antes pela aprovação do TI.",
+  fluxo: [
+    { passo: "Negócio", detalhe: "Entrevista em seis níveis, do ramo de atuação aos limites do agente" },
+    { passo: "Tecnologia", detalhe: "Computadores, rede e estrutura dos bancos, só com leitura" },
+    { passo: "Pendências", detalhe: "O que não ficou claro vira pergunta para uma pessoa" },
+    { passo: "Agente", detalhe: "Skills, regras de segurança e consultas aos sistemas" },
+    { passo: "Entrega", detalhe: "O TI aprova item a item e o servidor MCP é gerado" },
+  ],
+  numeros: [
+    { valor: "6 níveis", rotulo: "de entrevista sobre o negócio antes de qualquer análise técnica" },
+    { valor: "9 camadas", rotulo: "de proteção nas consultas que o agente faz aos sistemas" },
+    { valor: "56 testes", rotulo: "automatizados, incluindo os de segurança, rodando no CI" },
+  ],
+  rotuloLicao: "O princípio do projeto",
+  licao:
+    "Um agente só é útil se conhece a empresa, e só é seguro se os limites não dependem dele. Por isso a ferramenta pergunta em vez de supor, o agente nunca escreve SQL e o usuário do banco não tem permissão de escrita: se todas as outras proteções falhassem, o próprio banco ainda recusaria.",
+  repositorio: "https://github.com/FilipeF-Dev/mcp-builder",
+  stack: ["TypeScript", "MCP SDK", "PostgreSQL", "SQL Server"],
+};
+
+export const destaques: Destaque[] = [zabbix, mcpBuilder];
 
 export type Tema = "IA" | "Web" | "Mobile" | "Arquitetura";
 
@@ -83,22 +128,6 @@ export const projetos: Projeto[] = [
     links: [
       { rotulo: "Estudo de caso", url: "https://github.com/FilipeF-Dev/orbita-case-study" },
     ],
-  },
-  {
-    id: "mcp-builder",
-    nome: "MCP-Builder",
-    resumo:
-      "Ferramenta que mapeia uma empresa, do negócio à infraestrutura, e gera a base de um servidor MCP para conectar agentes de IA aos sistemas internos. Feita para pequenas e médias empresas, sem exigir conhecimento técnico de quem responde.",
-    mostra: "Agentes de IA conectados aos sistemas da empresa com segurança, skills e aprovação humana",
-    temas: ["IA", "Arquitetura"],
-    stack: ["TypeScript", "MCP SDK", "PostgreSQL", "SQL Server"],
-    decisoes: [
-      "Entrevista em seis níveis, do ramo de atuação ao que o agente pode fazer, e análise técnica somente leitura dos computadores, da rede e dos bancos",
-      "O que a ferramenta não consegue entender vira uma pergunta para uma pessoa, em vez de uma suposição",
-      "Consultas aos sistemas fixas e somente leitura, com usuário de banco sem permissão de escrita",
-      "Skills e servidor MCP montados apenas com o que o TI aprovou, item a item, com 56 testes automatizados e CI",
-    ],
-    links: [{ rotulo: "Repositório", url: "https://github.com/FilipeF-Dev/mcp-builder" }],
   },
   {
     id: "lar",
@@ -205,8 +234,8 @@ export const competencias: GrupoCompetencias[] = [
     grupo: "IA aplicada",
     itens: [
       { nome: "Integração com LLMs (Claude API)", onde: "destaque" },
-      { nome: "MCP (Model Context Protocol)", onde: "mcp-builder" },
-      { nome: "Skills e agentes de IA", onde: "mcp-builder" },
+      { nome: "MCP (Model Context Protocol)", onde: "destaque-mcp" },
+      { nome: "Skills e agentes de IA", onde: "destaque-mcp" },
       { nome: "Engenharia de prompt e de contexto", onde: "destaque" },
       { nome: "Avaliação de modelos", onde: "destaque" },
       { nome: "Controle de custo e prompt caching", onde: "destaque" },
