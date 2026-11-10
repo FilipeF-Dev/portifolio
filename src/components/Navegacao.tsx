@@ -22,7 +22,19 @@ export function Navegacao() {
       { rootMargin: "-30% 0px -60% 0px" },
     );
     alvos.forEach((el) => observador.observe(el));
-    return () => observador.disconnect();
+
+    // A última seção é curta e nunca sobe até a faixa acima: no fim da
+    // página, ela é a ativa.
+    const noFim = () => {
+      const fim = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4;
+      if (fim) setAtiva(secoes[secoes.length - 1].id);
+    };
+    window.addEventListener("scroll", noFim, { passive: true });
+
+    return () => {
+      observador.disconnect();
+      window.removeEventListener("scroll", noFim);
+    };
   }, []);
 
   return (
