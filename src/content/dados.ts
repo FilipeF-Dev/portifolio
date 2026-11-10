@@ -7,7 +7,7 @@ export const perfil = {
   // Coloque a foto em public/ e aponte aqui (ex.: "/foto.jpg"). Sem foto, aparecem as iniciais.
   foto: "/foto.jpg" as string | null,
   resumo:
-    "Construo software e automações com IA para problemas reais de uma empresa. Começo pela especificação, conduzo a IA na implementação e testo antes de colocar no ar.",
+    "Desenvolvedor de software e soluções de IA, com foco em automação e resolução de problemas reais de empresas. Estruturo soluções, defino arquiteturas e regras de negócio, orquestro ferramentas e agentes de IA durante o desenvolvimento e conduzo todo o processo, da concepção aos testes e implantação.",
   links: {
     github: "https://github.com/FilipeF-Dev",
     linkedin: "https://www.linkedin.com/in/filipe-ferreira-72b24624b/",
