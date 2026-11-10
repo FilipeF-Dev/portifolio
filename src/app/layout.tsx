@@ -12,10 +12,22 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const descricao =
+  "Analista de TI que constrói software e automações com IA: especificação primeiro, IA na implementação, testes antes de subir.";
+
 export const metadata: Metadata = {
+  // Endereço oficial: os links da prévia (Open Graph) saem a partir dele.
+  metadataBase: new URL("https://filipef.dev.br"),
   title: "Filipe Ferreira · software e automações com IA",
-  description:
-    "Analista de TI que constrói software e automações com IA: especificação primeiro, IA na implementação, testes antes de subir.",
+  description: descricao,
+  openGraph: {
+    type: "website",
+    locale: "pt_BR",
+    url: "/",
+    siteName: "Filipe Ferreira",
+    title: "Filipe Ferreira · software e automações com IA",
+    description: descricao,
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
