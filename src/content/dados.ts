@@ -5,7 +5,7 @@ export const perfil = {
   cargo: "Analista de TI · software e automações com IA",
   local: "Juiz de Fora, MG",
   // Coloque a foto em public/ e aponte aqui (ex.: "/foto.jpg"). Sem foto, aparecem as iniciais.
-  foto: null as string | null,
+  foto: "/foto.jpg" as string | null,
   resumo:
     "Construo software e automações com IA para problemas reais de uma empresa. Começo pela especificação, conduzo a IA na implementação e testo antes de colocar no ar.",
   links: {

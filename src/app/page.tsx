@@ -9,7 +9,8 @@ export default function Home() {
   return (
     <>
       <Navegacao />
-      <main>
+      <main className="relative isolate">
+        <div aria-hidden className="fundo-topo" />
         <Abertura />
         <Destaque />
         <Secao

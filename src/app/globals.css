@@ -9,6 +9,8 @@
   --borda: #e4e4e7;
   --destaque: #0f766e;
   --destaque-fundo: #f0fdfa;
+  --pontos: rgb(24 24 27 / 0.09);
+  --brilho: rgb(15 118 110 / 0.10);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -20,6 +22,8 @@
     --borda: #27272a;
     --destaque: #5eead4;
     --destaque-fundo: #0f2a27;
+    --pontos: rgb(255 255 255 / 0.09);
+    --brilho: rgb(94 234 212 / 0.11);
   }
 }
 
@@ -43,6 +47,25 @@ html {
 body {
   background: var(--fundo);
   color: var(--texto);
+}
+
+/*
+ * Textura do topo: grade de pontos que some ao descer e um brilho na cor de
+ * destaque atrás da abertura. Fica atrás de tudo e não recebe clique.
+ */
+.fundo-topo {
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 900px;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    radial-gradient(ellipse 60% 50% at 20% 25%, var(--brilho), transparent 70%),
+    radial-gradient(var(--pontos) 1px, transparent 1px);
+  background-size:
+    100% 100%,
+    22px 22px;
+  mask-image: linear-gradient(to bottom, black 40%, transparent);
 }
 
 /* Entrada ao rolar: só opacidade e um deslocamento curto. */
