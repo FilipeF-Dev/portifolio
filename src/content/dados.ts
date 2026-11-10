@@ -12,6 +12,10 @@ export const perfil = {
     github: "https://github.com/FilipeF-Dev",
     linkedin: "https://www.linkedin.com/in/filipe-ferreira-72b24624b/",
   },
+  contato: {
+    email: "fontes705@hotmail.com",
+    whatsapp: { exibido: "(32) 99966-9909", numero: "5532999669909" },
+  },
 };
 
 export const secoes = [

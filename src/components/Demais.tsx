@@ -75,8 +75,34 @@ export function Trajetoria() {
 
 export function Contato() {
   return (
-    <Secao id="contato" titulo="Contato" subtitulo="O caminho mais rápido é o LinkedIn.">
-      <div className="flex flex-wrap gap-3">
+    <Secao id="contato" titulo="Contato" subtitulo="Respondo por qualquer um destes.">
+      <dl className="grid gap-4 sm:grid-cols-2">
+        <div className="rounded-lg border border-borda bg-superficie p-5">
+          <dt className="text-sm text-suave">E-mail</dt>
+          <dd className="mt-1">
+            <a
+              href={`mailto:${perfil.contato.email}`}
+              className="font-medium text-destaque underline-offset-4 hover:underline"
+            >
+              {perfil.contato.email}
+            </a>
+          </dd>
+        </div>
+        <div className="rounded-lg border border-borda bg-superficie p-5">
+          <dt className="text-sm text-suave">WhatsApp</dt>
+          <dd className="mt-1">
+            <a
+              href={`https://wa.me/${perfil.contato.whatsapp.numero}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium text-destaque underline-offset-4 hover:underline"
+            >
+              {perfil.contato.whatsapp.exibido}
+            </a>
+          </dd>
+        </div>
+      </dl>
+      <div className="mt-6 flex flex-wrap gap-3">
         <a
           href={perfil.links.linkedin}
           target="_blank"
